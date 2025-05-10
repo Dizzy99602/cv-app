@@ -1,5 +1,5 @@
 // src/components/App.jsx
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import GeneralInfo from './components/GeneralInfo';
 import Education from './components/Education';
 import Experience from './components/Experience';
@@ -15,6 +15,22 @@ function App() {
   
   const [education, setEducation] = useState([]);
   const [experience, setExperience] = useState([]);
+
+  // In App.jsx
+useEffect(() => {
+  const savedData = localStorage.getItem('cvData');
+  if (savedData) {
+    const { generalInfo, education, experience } = JSON.parse(savedData);
+    setGeneralInfo(generalInfo);
+    setEducation(education);
+    setExperience(experience);
+  }
+}, []);
+
+useEffect(() => {
+  const cvData = { generalInfo, education, experience };
+  localStorage.setItem('cvData', JSON.stringify(cvData));
+}, [generalInfo, education, experience]);
 
   return (
     <div className="app-container">
