@@ -1,38 +1,51 @@
 // src/components/CVPreview.jsx
+import '../styles/CVPreview.css';
 
 function CVPreview({ generalInfo, education, experience }) {
   return (
     <div className="cv-preview">
-      <h1>CV Preview</h1>
+      <header className="cv-header">
+        <h1>{generalInfo.name || "Your Name"}</h1>
+        <div className="contact-info">
+          {generalInfo.email && <span>{generalInfo.email}</span>}
+          {generalInfo.phone && <span>{generalInfo.phone}</span>}
+        </div>
+      </header>
       
-      <section className="general-info-preview">
-        <h2>{generalInfo.name}</h2>
-        <p>Email: {generalInfo.email}</p>
-        <p>Phone: {generalInfo.phone}</p>
-      </section>
+      {education.length > 0 && (
+        <section className="cv-section">
+          <h2>Education</h2>
+          {education.map((edu, index) => (
+            <div key={index} className="cv-item">
+              <div className="cv-item-header">
+                <h3>{edu.school || "School Name"}</h3>
+                <span className="date-range">
+                  {edu.startDate || "Start"} - {edu.endDate || "End"}
+                </span>
+              </div>
+              <p>{edu.degree || "Degree/Field of Study"}</p>
+            </div>
+          ))}
+        </section>
+      )}
       
-      <section className="education-preview">
-        <h2>Education</h2>
-        {education.map((edu, index) => (
-          <div key={index} className="education-item">
-            <h3>{edu.school}</h3>
-            <p>{edu.degree}</p>
-            <p>{edu.startDate} - {edu.endDate}</p>
-          </div>
-        ))}
-      </section>
-      
-      <section className="experience-preview">
-        <h2>Work Experience</h2>
-        {experience.map((exp, index) => (
-          <div key={index} className="experience-item">
-            <h3>{exp.company}</h3>
-            <p>{exp.position}</p>
-            <p>{exp.startDate} - {exp.endDate}</p>
-            <p>{exp.responsibilities}</p>
-          </div>
-        ))}
-      </section>
+      {experience.length > 0 && (
+        <section className="cv-section">
+          <h2>Experience</h2>
+          {experience.map((exp, index) => (
+            <div key={index} className="cv-item">
+              <div className="cv-item-header">
+                <h3>{exp.company || "Company Name"}</h3>
+                <span className="date-range">
+                  {exp.startDate || "Start"} - {exp.endDate || "End"}
+                </span>
+              </div>
+              <h4>{exp.position || "Position Title"}</h4>
+              <p>{exp.responsibilities || "Job responsibilities"}</p>
+            </div>
+          ))}
+        </section>
+      )}
     </div>
   );
 }

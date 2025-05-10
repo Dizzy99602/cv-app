@@ -1,5 +1,5 @@
 // src/components/GeneralInfo.jsx
-import { useState } from 'react';
+import '../styles/GeneralInfo.css';
 
 function GeneralInfo({ data, setData }) {
   const handleChange = (e) => {
@@ -10,27 +10,36 @@ function GeneralInfo({ data, setData }) {
   return (
     <div className="general-info">
       <h2>General Information</h2>
-      <input
-        type="text"
-        name="name"
-        value={data.name}
-        onChange={handleChange}
-        placeholder="Full Name"
-      />
-      <input
-        type="email"
-        name="email"
-        value={data.email}
-        onChange={handleChange}
-        placeholder="Email"
-      />
-      <input
-        type="tel"
-        name="phone"
-        value={data.phone}
-        onChange={handleChange}
-        placeholder="Phone Number"
-      />
+      <div className="form-group">
+        <label>Full Name</label>
+        <input
+          type="text"
+          name="name"
+          value={data.name}
+          onChange={handleChange}
+          placeholder="John Doe"
+        />
+      </div>
+      <div className="form-group">
+        <label>Email</label>
+        <input
+          type="email"
+          name="email"
+          value={data.email}
+          onChange={handleChange}
+          placeholder="john@example.com"
+        />
+      </div>
+      <div className="form-group">
+        <label>Phone Number</label>
+        <input
+          type="tel"
+          name="phone"
+          value={data.phone}
+          onChange={handleChange}
+          placeholder="(123) 456-7890"
+        />
+      </div>
     </div>
   );
 }
